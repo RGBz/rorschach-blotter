@@ -12,7 +12,7 @@ Included are two files:
 The rorschach.html file will allow you to quickly generate a Rorschach inkblot
 in your browser (tested with Google Chrome).
 
-This rorschah.html file references the rorschach.js file that contains the guts
+This rorschach.html file references the rorschach.js file that contains the guts
 of the inkblot painting.
 
 You can use this rorschach.js file however you want.  You don't need to credit
