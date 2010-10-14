@@ -36,14 +36,15 @@ function Color(red, green, blue) {
     this.red = red;
     this.green = green;
     this.blue = blue;
-    
-    /**
-     * Returns a string version of the color
-     * @returns String version of the color
-     */
-    this.toString = function() {
-    	return "rgb(" + this.red + "," + this.green + "," + this.blue + ")";
-    }
+}
+
+/**
+ * Returns a string version of the color
+ * 
+ * @returns String version of the color
+ */
+Color.prototype.toString = function() {
+    return "rgb(" + this.red + "," + this.green + "," + this.blue + ")";
 }
 
 /**
