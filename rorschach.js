@@ -98,7 +98,7 @@ Color.prototype.diff = function(color) {
  * @returns String version of the color
  */
 Color.prototype.toString = function() {
-    return "rgb(" + this.red + "," + this.green + "," + this.blue + ")";
+    return "rgba(" + this.red + "," + this.green + "," + this.blue + ",0.6666)";
 }
 
 /**
@@ -179,8 +179,8 @@ RorschachPainter.prototype.paint = function(canvasId) {
     
     // Generate a random brush
     var brush = new Brush(
-        randomInt(this.blobWidthMax), // Random blob width
-        randomInt(this.blobHeightMax), // Random blob height
+        randomRange(1, this.blobWidthMax), // Random blob width
+        randomRange(1, this.blobHeightMax), // Random blob height
         baseColor.clone()); // Start with a base color from the palette
     
     // Pick a random point to draw first
@@ -207,14 +207,14 @@ RorschachPainter.prototype.paint = function(canvasId) {
         brush.color.setRed(brush.color.red - 1 + (randomInt(100) % 3));
         brush.color.setGreen(brush.color.green - 1 + (randomInt(100) % 3));
         brush.color.setBlue(brush.color.blue - 1 + (randomInt(100) % 3));
-
+        
         // Pick a random spot to draw the blob
-        x = (x - 5) + (randomInt(100) % 11);
-        y = (y - 5) + (randomInt(100) % 11);
+        x = (x - 4) + (randomInt(100) % 9);
+        y = (y - 4) + (randomInt(100) % 9);
 
         // Pick random blob dimensions
-        brush.width = randomInt(this.blobWidthMax);
-        brush.height = randomInt(this.blobHeightMax);
+        brush.width = randomRange(1, this.blobWidthMax);
+        brush.height = randomRange(1, this.blobHeightMax);
         
         // Make sure the colors are near enough to the base color from the palette
         if(brush.color.diff(baseColor) > COLOR_RANGE) {
