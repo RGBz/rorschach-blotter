@@ -39,6 +39,60 @@ function Color(red, green, blue) {
 }
 
 /**
+ * Set the red part of the color
+ * 
+ * @param red the red part of the color between 255 and 0
+ */
+Color.prototype.setRed = function(red) {
+	this.red = (red > 0) ? ((red < 255) ? red : 255) : 0;
+}
+
+/**
+ * Set the green part of the color
+ * 
+ * @param green the green part of the color between 255 and 0
+ */
+Color.prototype.setGreen = function(green) {
+	this.green = (green > 0) ? ((green < 255) ? green : 255) : 0;
+}
+
+/**
+ * Set the blue part of the color
+ * 
+ * @param blue the blue part of the color between 255 and 0
+ */
+Color.prototype.setBlue = function(blue) {
+	this.blue = (blue > 0) ? ((blue < 255) ? blue : 255) : 0;
+}
+
+/**
+ * Clones a color
+ * 
+ * @returns a clone of this color
+ */
+Color.prototype.clone = function() {
+	return new Color(this.red, this.green, this.blue);
+}
+
+/**
+ * Find the difference (distance between color coordinates)
+ * 
+ * @param color a color to compare against
+ * 
+ * @returns an integer representing the non-square-rooted
+ * difference between two colors
+ */
+Color.prototype.diff = function(color) {
+    var r = this.red - color.red;
+    var g = this.green - color.green;
+    var b = this.blue - color.blue;
+    
+    var nonSquareRootedDistance = (r * r) + (g * g) + (b * b);
+        
+    return nonSquareRootedDistance;
+}
+
+/**
  * Returns a string version of the color
  * 
  * @returns String version of the color
@@ -72,6 +126,10 @@ function RorschachPainter() {
     // Default the range of ink blobs to be drawn
     this.inkAmountMin = 1000;
     this.inkAmountMax = 5000;
+    
+    // Default the maximum blob dimensions
+    this.blobWidthMax = 10;
+    this.blobHeightMax = 10;
 }
 
 /**
@@ -81,6 +139,17 @@ function RorschachPainter() {
  */
 RorschachPainter.prototype.setPalette = function(palette) {
     this.palette = palette;
+}
+
+/**
+ * Set the maximum dimensions for the paint blobs (rectangles)
+ * 
+ * @param width the maximum blob width
+ * @param height the maximum blob height
+ */
+RorschachPainter.prototype.setMaximumBlobDimensions = function(width, height) {
+	this.blobWidthMax = width;
+	this.blobHeightMax = height;
 }
 
 /**
@@ -110,16 +179,16 @@ RorschachPainter.prototype.paint = function(canvasId) {
     
     // Generate a random brush
     var brush = new Brush(
-        randomInt(8), // Random blob width
-        randomInt(4), // Random blob height
-        baseColor); // Start with a base color from the palette
+        randomInt(this.blobWidthMax), // Random blob width
+        randomInt(this.blobHeightMax), // Random blob height
+        baseColor.clone()); // Start with a base color from the palette
     
     // Pick a random point to draw first
     var x = randomInt(rorschachCanvas.width / 2);
     var y = randomInt(rorschachCanvas.height);
 
     // Maximum range of values a color can stray
-    var COLOR_RANGE = 25;
+    var COLOR_RANGE = Math.pow(8, 2); // Squared since the color distance algorithm does the same 
 
     // The number of blobs to make
     var inkAmount = randomRange(this.inkAmountMin, this.inkAmountMax);
@@ -135,23 +204,21 @@ RorschachPainter.prototype.paint = function(canvasId) {
         // Now it's time to prepare the next random location for the blob!
         
         // Generate a color near to the last one
-        brush.color.red = (brush.color.red - 1) + (randomInt(100) % 3);
-        brush.color.green = (brush.color.green - 1) + (randomInt(100) % 3)
-        brush.color.blue = (brush.color.blue - 1) + (randomInt(100) % 3)
+        brush.color.setRed(brush.color.red - 1 + (randomInt(100) % 3));
+        brush.color.setGreen(brush.color.green - 1 + (randomInt(100) % 3));
+        brush.color.setBlue(brush.color.blue - 1 + (randomInt(100) % 3));
 
         // Pick a random spot to draw the blob
         x = (x - 5) + (randomInt(100) % 11);
         y = (y - 5) + (randomInt(100) % 11);
 
         // Pick random blob dimensions
-        brush.width = randomInt(5);
-        brush.height = randomInt(5);
+        brush.width = randomInt(this.blobWidthMax);
+        brush.height = randomInt(this.blobHeightMax);
         
         // Make sure the colors are near enough to the base color from the palette
-        if(Math.abs(baseColor.red - brush.color.red) > COLOR_RANGE
-                || Math.abs(baseColor.green - brush.color.green) > COLOR_RANGE
-                || Math.abs(baseColor.blue - brush.color.blue) > COLOR_RANGE) {
-            brush.color = this.palette[randomInt(this.palette.length)];
+        if(brush.color.diff(baseColor) > COLOR_RANGE) {
+            brush.color = this.palette[randomInt(this.palette.length)].clone();
         }
 
         // Make sure the blob is inside the width of half the canvas
