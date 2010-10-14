@@ -44,7 +44,7 @@ function Color(red, green, blue) {
  * @param red the red part of the color between 255 and 0
  */
 Color.prototype.setRed = function(red) {
-	this.red = (red > 0) ? ((red < 255) ? red : 255) : 0;
+    this.red = (red > 0) ? ((red < 255) ? red : 255) : 0;
 }
 
 /**
@@ -53,7 +53,7 @@ Color.prototype.setRed = function(red) {
  * @param green the green part of the color between 255 and 0
  */
 Color.prototype.setGreen = function(green) {
-	this.green = (green > 0) ? ((green < 255) ? green : 255) : 0;
+    this.green = (green > 0) ? ((green < 255) ? green : 255) : 0;
 }
 
 /**
@@ -62,7 +62,7 @@ Color.prototype.setGreen = function(green) {
  * @param blue the blue part of the color between 255 and 0
  */
 Color.prototype.setBlue = function(blue) {
-	this.blue = (blue > 0) ? ((blue < 255) ? blue : 255) : 0;
+    this.blue = (blue > 0) ? ((blue < 255) ? blue : 255) : 0;
 }
 
 /**
@@ -71,7 +71,7 @@ Color.prototype.setBlue = function(blue) {
  * @returns a clone of this color
  */
 Color.prototype.clone = function() {
-	return new Color(this.red, this.green, this.blue);
+    return new Color(this.red, this.green, this.blue);
 }
 
 /**
@@ -148,8 +148,8 @@ RorschachPainter.prototype.setPalette = function(palette) {
  * @param height the maximum blob height
  */
 RorschachPainter.prototype.setMaximumBlobDimensions = function(width, height) {
-	this.blobWidthMax = width;
-	this.blobHeightMax = height;
+    this.blobWidthMax = width;
+    this.blobHeightMax = height;
 }
 
 /**
