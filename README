@@ -1,0 +1,24 @@
+-------------------------------------------------------------------------------
+
+This is a simple project to allow someone to create a procedurally generated
+Rorschach inkblot using JavaScript on a browser that supports HTML5 and more
+specifically, the canvas tag.
+
+Included are two files:
+
+  * rorschach.js
+  * rorschach.html
+  
+The rorschach.html file will allow you to quickly generate a Rorschach inkblot
+in your browser (tested with Google Chrome).
+
+This rorschah.html file references the rorschach.js file that contains the guts
+of the inkblot painting.
+
+You can use this rorschach.js file however you want.  You don't need to credit
+me in any way.
+
+For example you can use it to added client-side processed rorschach inkblots to
+your web page.
+
+Have fun!
