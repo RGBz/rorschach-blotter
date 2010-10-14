@@ -65,13 +65,13 @@ function Brush(width, height, color) {
  * Rorschach ink blot images using an HTML5 canvas element
  */
 function RorschachPainter() {
-	
-	// Default the palette to contain only black
-	this.palette = [new Color(0, 0, 0)];
-	
-	// Default the range of ink blobs to be drawn
-	this.inkAmountMin = 1000;
-	this.inkAmountMax = 5000;
+    
+    // Default the palette to contain only black
+    this.palette = [new Color(0, 0, 0)];
+    
+    // Default the range of ink blobs to be drawn
+    this.inkAmountMin = 1000;
+    this.inkAmountMax = 5000;
 }
 
 /**
@@ -80,7 +80,7 @@ function RorschachPainter() {
  * @param palette an array of Color objects
  */
 RorschachPainter.prototype.setPalette = function(palette) {
-	this.palette = palette;
+    this.palette = palette;
 }
 
 /**
@@ -90,8 +90,8 @@ RorschachPainter.prototype.setPalette = function(palette) {
  * @param max the maximum number of blobs to be drawn
  */
 RorschachPainter.prototype.setInkAmountRange = function(min, max) {
-	this.inkAmountMin = min;
-	this.inkAmountMax = max;
+    this.inkAmountMin = min;
+    this.inkAmountMax = max;
 }
 
 /**
@@ -100,7 +100,7 @@ RorschachPainter.prototype.setInkAmountRange = function(min, max) {
  * @param canvasId id for an HTML5 canvas element
  */
 RorschachPainter.prototype.paint = function(canvasId) {
-	
+    
     // Get the canvas context
     var rorschachCanvas = document.getElementById(canvasId);
     var context = rorschachCanvas.getContext('2d');
