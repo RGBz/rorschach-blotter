@@ -3,46 +3,39 @@
     <link rel="icon" type="image/jpg" href="http://en.gravatar.com/userimage/17234499/85c61f1373931799c7849103d1a9aa7a.jpg">
     <title>Sample Rorschach Inkblot</title>
     <style>
-    body {text-align:center;font-style:italic;color:#aaa;font-family:sans-serif}
-    img {border:1px solid #aaa;padding:4px}
-    canvas {margin:0 auto}
+      body {
+        text-align: center;
+        font-style: italic;
+        color: #aaa;
+        font-family: sans-serif;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+      canvas {
+        box-shadow: 0 5px 10px rgba(0,0,0,0.5);
+        margin: 20px;
+      }
+      a {
+        color: #0088ff;
+        text-decoration: none;
+      }
     </style>
-    <script type="text/javascript" src="rorschach.js"></script>
   </head>
   <body>
-
-    <!-- Create an HTML5 canvas to paint on -->
-    <canvas id="rorschachCanvas" width="800" height="400">
-    This text is displayed if your browser does not support HTML5 Canvas.
+    <canvas id="canvas" width="600" height="300">
+      This text is displayed if your browser does not support HTML5 Canvas.
     </canvas>
     <p>
-    A nice Rorschach inkblot sample by RGBz
+      A nice Rorschach inkblot sample by <a href="https://github.com/rgbz">@RGBz</a>
     </p>
-    <p>
-      <img src="http://en.gravatar.com/userimage/17234499/85c61f1373931799c7849103d1a9aa7a.jpg"/>
-    </p>
-
-    <!-- Run the rorschach script -->
-    <script type="text/javascript">
-
-    // Create a Rorschach inkblot painter
-    var painter = new RorschachPainter();
-
-    // Set the amount of ink range
-    painter.setInkAmountRange(2500, 25000);
-
-    // Set the maximum blob dimensions
-    painter.setMaximumBlobDimensions(7, 5);
-
-    // Set the palette to a few colors
-    painter.setPalette([
-      new Color(0, 0, 0)
-    ]);
-
-    // Paint the inkblot on the canvas element
-    painter.paint("rorschachCanvas");
-
+    <script src="./rorschach.js"></script>
+    <script>
+      renderRorschachInkBlot(document.getElementById('canvas'), {
+        blots: randInt(10, 100),
+        iterations: 50
+      });
     </script>
-
   </body>
 </html>
