@@ -1,7 +1,6 @@
 # Rorschach Inkblot Painter
 This is a simple project to allow someone to create a procedurally generated
-Rorschach inkblot using JavaScript on a browser that supports HTML5 and more
-specifically, the canvas tag.
+Rorschach inkblot using JavaScript in a browser.
 
 Included are two files:
 
